@@ -81,3 +81,5 @@ def one():
     print('one')
 def two():
     print('two')
+def tree():
+    print('tree')
