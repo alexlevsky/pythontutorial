@@ -78,4 +78,6 @@ with open("file.json", "w") as out:
 
 #function from add to test git
 def one():
-    print(one)
+    print('one')
+def two():
+    print('two')
