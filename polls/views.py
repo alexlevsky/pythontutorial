@@ -58,6 +58,7 @@ def form(request):
     request.session['3'] = 'docum'
     print(request.session['0'])
     print('dddddddddddd')
+
     print(request.session['1'])
     print(request.session['2'])
     print(request.session['3'])
@@ -75,3 +76,6 @@ with open("file.json", "w") as out:
     json_serializer.serialize(Question.objects.all(), stream=out)
 
 
+#function from add to test git
+def one():
+    print(one)
