@@ -75,3 +75,16 @@ with open("file.json", "w") as out:
     json_serializer.serialize(Question.objects.all(), stream=out)
 
 
+
+
+
+
+
+
+
+
+
+
+
+def masterone():
+    print('masterone')
