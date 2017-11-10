@@ -39,3 +39,39 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 # Create your views here.
+
+from django import forms
+from django.contrib.sessions.backends.db import SessionStore
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(max_length=100)
+    message = forms.CharField(widget=forms.Textarea)
+    sender = forms.EmailField()
+    cc_myself = forms.BooleanField(required=False)
+
+
+def form(request):
+    f = ContactForm()
+    request.session['0']='bar'
+    request.session['1']='navi'
+    request.session['2'] = 'enter'
+    request.session['3'] = 'docum'
+    print(request.session['0'])
+    print('dddddddddddd')
+    print(request.session['1'])
+    print(request.session['2'])
+    print(request.session['3'])
+    request.session.set_test_cookie()
+    print(request.session.test_cookie_worked())
+
+    return render(request, 'polls/form.html', {'form': f} )
+
+
+from django.core import serializers
+JSONSerializer = serializers.get_serializer("json")
+json_serializer = JSONSerializer()
+
+with open("file.json", "w") as out:
+    json_serializer.serialize(Question.objects.all(), stream=out)
+
+
