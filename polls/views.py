@@ -49,22 +49,21 @@ class ContactForm(forms.Form):
     sender = forms.EmailField()
     cc_myself = forms.BooleanField(required=False)
 
-
+# робота з сессиями
 def form(request):
     f = ContactForm()
     request.session['0']='bar'
     request.session['1']='navi'
     request.session['2'] = 'enter'
-    request.session['3'] = 'docum'
+    request.session['3'] = 'docum' #  запись в сессию
     print(request.session['0'])
     print('dddddddddddd')
     print(request.session['1'])
     print(request.session['2'])
     print(request.session['3'])
-    request.session.set_test_cookie()
-    print(request.session.test_cookie_worked())
-
-    return render(request, 'polls/form.html', {'form': f} )
+    request.session.set_test_cookie()  # ставим тестовую куку
+    print(request.session.test_cookie_worked())  # проверяем ёё
+    return render(request, 'polls/form.html', {'form': f} ) #  связиваем форму со значением ф
 
 
 from django.core import serializers
@@ -75,16 +74,29 @@ with open("file.json", "w") as out:
     json_serializer.serialize(Question.objects.all(), stream=out)
 
 
-
-
-
-
-
-
-
-
-
-
-
 def masterone():
     print('masterone')
+
+def one():
+    print('one')
+def two():
+    print('two')
+def tree():
+    print('tree')
+
+
+import csv
+
+
+# робота з csv скачиваеться файл somefilename.csv на компютер пользователя
+def somev(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['First row', 'Foo', 'Bar', 'Baz'])   # запись в первую строчку файла
+    writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
+
+    return response
+
